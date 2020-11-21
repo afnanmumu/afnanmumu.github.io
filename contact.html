@@ -59,23 +59,42 @@ http://www.templatemo.com/tm-476-conquer
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
-                        <form action="#" method="post" class="contact-form">
+                        <form action="#" method="post" class="contact-form" id="contactForm">
                             <div class="col-sm-6 contact-form-left">
                                 <div class="form-group">
-                                    <input name="name" type="text" class="form-control" id="name" placeholder="Name">
-                                    <input type="email" name="email" class="form-control" id="mail" placeholder="Email">
-                                    <input name="subject" type="text" class="form-control" id="subject"
+                                    <input name="name" id="name" type="text" class="form-control" placeholder="Name">
+                                    <input type="email" id="email" name="email" class="form-control"  placeholder="Email">
+                                    <input name="subject" id="subject" type="text" class="form-control" id="subject"
                                         placeholder="Subject">
                                 </div>
                             </div>
                             <div class="col-sm-6 contact-form-right">
                                 <div class="form-group">
-                                    <textarea name="message" rows="6" class="form-control" id="comment"
+                                    <textarea name="message" rows="6" id="message" class="form-control" 
                                         placeholder="Your message here..."></textarea>
                                     <button type="submit" class="btn btn-default"><a href="index.html">Send</a></button>
                                 </div>
                             </div>
                         </form>
+                        <!-- <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input id="name" class="form-control" type="text" placeholder="Name">
+                        
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input id="email" class="form-control" type="email" aria-describedby="emailHint" placeholder="Enter email">
+                            </div>
+                        
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" class="form-control" placeholder="Message" rows="5"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-warning">Submit</button>
+                        
+                            <!---</form>--->
+                        </form> -->
                     </div>
                 </div>
             </div>
@@ -213,6 +232,93 @@ http://www.templatemo.com/tm-476-conquer
                                     });
 
                                 });
+                            </script>
+                            <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+                            
+                            <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script>
+                            <!--    
+                                        <script defer src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script> --> -->
+                            
+                            
+                            <!-- TODO: Add SDKs for Firebase products that you want to use
+                                         https://firebase.google.com/docs/web/setup#available-libraries -->
+                            
+                            <script>
+                                // Your web app's Firebase configuration
+                                var firebaseConfig = {
+                                    apiKey: "AIzaSyD5pQMEnA5VP3NzaCwtH3fATT048Nz-f1k",
+                                    authDomain: "comment-ece46.firebaseapp.com",
+                                    databaseURL: "https://comment-ece46.firebaseio.com",
+                                    projectId: "comment-ece46",
+                                    storageBucket: "comment-ece46.appspot.com",
+                                    messagingSenderId: "535649967045",
+                                    appId: "1:535649967045:web:9be365f85bc91099e709ac"
+                                };
+                                // Initialize Firebase
+                                firebase.initializeApp(firebaseConfig);
+
+                                
+
+
+                                //Rootref is the whole database.
+                                const rootRef = firebase.database().ref();
+                                //commentsRef is just the pageCountsNode
+                                const commentsRef = rootRef.child('comments');
+                                //Listen for click on Submit Comment button, and post comment.
+                                document.getElementById("btnSubmitComment").addEventListener("click", function () {
+                                    //Replace line breaks in comment with br tags.
+                                    var newcomment = document.getElementById('txComment').value.replace(/\n/g, "<br>");
+                                    //Define a new, keyed post.
+                                    var newPostRef = commentsRef.push();
+                                    //Fill tne new keyed post with data
+                                    newPostRef.set({
+                                        name: document.getElementById('tbName').value.trim(),
+                                        comment: newcomment.trim(),
+                                        frompage: location.pathname,
+                                        when: firebase.database.ServerValue.TIMESTAMP
+                                    });
+                                });
+
+                                function showpastcomments() {
+                                    var showat = document.getElementById('pastcomments');
+                                    //Get comments whose from page equals this page's pathname.
+                                    var commentsRef = firebase.database().ref('comments/').orderByChild('frompage').equalTo(location.pathname);
+                                    commentsRef.once('value', function (snapshot) {
+                                        snapshot.forEach(function (itemSnapshot) {
+                                            //Get the object for one snapshot
+                                            var itemData = itemSnapshot.val();
+                                            var comment = itemData.comment;
+                                            var name = itemData.name;
+                                            var when = new Date(itemData.when).toLocaleDateString("en-us");
+                                            showat.innerHTML += "<li>" + comment + "<span> -- " + name + " (" + when +
+                                                ")</span></li>";
+                                        })
+                                    })
+                                }
+                                //Called when page first opens and also after Submit button click to show all comments for this page.
+                                showpastcomments()
+                                const userName = document.getElementById("name");
+                                    const userEmail = document.getElementById("email");
+                                    const userMessage = document.getElementById("message");
+                                    const subject= document.getElementById("subject")
+
+                                    const submitBtn = document.getElementById("submitAdd");
+
+                                    const database = firebase.database();
+
+                                    submitBtn.addEventListener('click', (e) => {
+                                        console.log(userEmail);
+                                        e.preventDefault();
+                                        database.ref('/users/' + userName.value).set({
+
+                                            user_Email: userEmail.value,
+                                            
+                                            user_Message: userMessage.value,
+                                            
+                                        });
+                                        document.getElementById("contactForm").reset();
+
+                                    });
                             </script>
                             </body>
                             
