@@ -31,7 +31,7 @@ http://www.templatemo.com/tm-476-conquer
                     <li><a href="index.html">Homepage</a></li>
                     <li><a href="Categories.html">Categories</a></li>
                     <li><a href="Sign in.html">Sign In</a></li>
-                    <li><a href="#">Sign Out</a></li>
+                    <li><a href="#" onclick="signOut()" id="signOut">Sign Out</a></li>
                 </ul>
             </div>
         </div>
@@ -307,45 +307,6 @@ http://www.templatemo.com/tm-476-conquer
                         <div class="blog-content1">
                             <h2>Popular Recipe</h2>
 
-                            <!-- <div class="post-wrapper">
-                                <h4 class="diet-vegetarian"><a href="https://www.cookwithmanali.com/bengali-rasgulla/"
-                                        title="Bengali Rasgulla">Bengali Rasgulla</a></h4>
-                                <div class="entry-content"> <a href="https://www.cookwithmanali.com/bengali-rasgulla/" title="Bengali Rasgulla"
-                                        class="loop-entry-img-link"> <img width="150" height="150"
-                                            src="https://www.cookwithmanali.com/wp-content/uploads/2014/06/Bengali-Rasgulla-Recipe-notitle-cwm-150x150.jpg"
-                                            class="attachment-thumbnail size-thumbnail wp-post-image lazyloaded" alt=""
-                                            data-lazy-srcset="https://www.cookwithmanali.com/wp-content/uploads/2014/06/Bengali-Rasgulla-Recipe-notitle-cwm-150x150.jpg 150w, https://www.cookwithmanali.com/wp-content/uploads/2014/06/Bengali-Rasgulla-Recipe-notitle-cwm-500x500.jpg 500w, https://www.cookwithmanali.com/wp-content/uploads/2014/06/Bengali-Rasgulla-Recipe-notitle-cwm-310x310.jpg 310w"
-                                            data-lazy-sizes="(max-width: 150px) 100vw, 150px"
-                                            data-lazy-src="https://www.cookwithmanali.com/wp-content/uploads/2014/06/Bengali-Rasgulla-Recipe-notitle-cwm-150x150.jpg"
-                                            data-pin-description="How To Make Soft Rasmalai At Home - Cook With Manali"
-                                            sizes="(max-width: 150px) 100vw, 150px"
-                                            srcset="https://www.cookwithmanali.com/wp-content/uploads/2014/06/Bengali-Rasgulla-Recipe-notitle-cwm-150x150.jpg 150w, https://www.cookwithmanali.com/wp-content/uploads/2014/06/Bengali-Rasgulla-Recipe-notitle-cwm-500x500.jpg 500w, https://www.cookwithmanali.com/wp-content/uploads/2014/06/Bengali-Rasgulla-Recipe-notitle-cwm-310x310.jpg 310w"
-                                            data-was-processed="true"><noscript><img width="150" height="150"
-                                                src="https://www.cookwithmanali.com/wp-content/uploads/2014/06/Bengali-Rasgulla-Recipe-notitle-cwm-150x150.jpg"
-                                                class="attachment-thumbnail size-thumbnail wp-post-image" alt=""
-                                                srcset="https://www.cookwithmanali.com/wp-content/uploads/2014/06/Bengali-Rasgulla-Recipe-notitle-cwm-150x150.jpg 150w, https://www.cookwithmanali.com/wp-content/uploads/2014/06/Bengali-Rasgulla-Recipe-notitle-cwm-500x500.jpg 500w, https://www.cookwithmanali.com/wp-content/uploads/2014/06/Bengali-Rasgulla-Recipe-notitle-cwm-310x310.jpg 310w"
-                                                sizes="(max-width: 150px) 100vw, 150px" /></noscript> </a></div>
-                            </div>
-                            <div class="post-wrapper">
-                                <h2 class="diet-vegetarian"><a href="https://www.cookwithmanali.com/chum-chum-diwali-sweet/"
-                                        title="Chum Chum – Diwali Sweet">Chum Chum – Diwali Sweet</a></h2>
-                                <div class="entry-content"> <a href="https://www.cookwithmanali.com/chum-chum-diwali-sweet/"
-                                        title="Chum Chum – Diwali Sweet" class="loop-entry-img-link"> <img width="150" height="150"
-                                            src="https://www.cookwithmanali.com/wp-content/uploads/2014/10/Indian-Sweet-Chum-Chum-150x150.jpg"
-                                            class="attachment-thumbnail size-thumbnail wp-post-image lazyloaded" alt=""
-                                            data-lazy-srcset="https://www.cookwithmanali.com/wp-content/uploads/2014/10/Indian-Sweet-Chum-Chum-150x150.jpg 150w, https://www.cookwithmanali.com/wp-content/uploads/2014/10/Indian-Sweet-Chum-Chum-500x500.jpg 500w, https://www.cookwithmanali.com/wp-content/uploads/2014/10/Indian-Sweet-Chum-Chum-310x310.jpg 310w"
-                                            data-lazy-sizes="(max-width: 150px) 100vw, 150px"
-                                            data-lazy-src="https://www.cookwithmanali.com/wp-content/uploads/2014/10/Indian-Sweet-Chum-Chum-150x150.jpg"
-                                            data-pin-description="How To Make Soft Rasmalai At Home - Cook With Manali"
-                                            sizes="(max-width: 150px) 100vw, 150px"
-                                            srcset="https://www.cookwithmanali.com/wp-content/uploads/2014/10/Indian-Sweet-Chum-Chum-150x150.jpg 150w, https://www.cookwithmanali.com/wp-content/uploads/2014/10/Indian-Sweet-Chum-Chum-500x500.jpg 500w, https://www.cookwithmanali.com/wp-content/uploads/2014/10/Indian-Sweet-Chum-Chum-310x310.jpg 310w"
-                                            data-was-processed="true"><noscript><img width="150" height="150"
-                                                src="https://www.cookwithmanali.com/wp-content/uploads/2014/10/Indian-Sweet-Chum-Chum-150x150.jpg"
-                                                class="attachment-thumbnail size-thumbnail wp-post-image" alt=""
-                                                srcset="https://www.cookwithmanali.com/wp-content/uploads/2014/10/Indian-Sweet-Chum-Chum-150x150.jpg 150w, https://www.cookwithmanali.com/wp-content/uploads/2014/10/Indian-Sweet-Chum-Chum-500x500.jpg 500w, https://www.cookwithmanali.com/wp-content/uploads/2014/10/Indian-Sweet-Chum-Chum-310x310.jpg 310w"
-                                                sizes="(max-width: 150px) 100vw, 150px" /></noscript> </a></div>
-                            </div> -->
-
                             <div class="pp">
                                 <h4><a href="Chanar Jilapi.html">Chanar jilapi</a></h4>
                                 <img src="img/chanarjilapi.jpg" alt="Image" >
@@ -371,7 +332,8 @@ http://www.templatemo.com/tm-476-conquer
                 </div>
             </div>
         </section>
-        <div id="section5">
+        <br>
+        <div id="section5" >
             <!-- Start Contact Area -->
             <section id="contact-area" class="contact-section">
                 <div class="container">
@@ -385,7 +347,7 @@ http://www.templatemo.com/tm-476-conquer
                                             <li><a href="index.html">Homepage</a></li>
                                             <li><a href="Categories.html">Categories</a></li>
                                             <li><a href="Sign in.html">Sign In</a></li>
-                                            <li><a href="#">Sign Out</a></li>
+                                            <li><a href="#" onclick="signOut" id="signOut">Sign Out</a></li>
         
                                         </ul>
                                     </div>

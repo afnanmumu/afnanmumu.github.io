@@ -139,21 +139,23 @@ http://www.templatemo.com/tm-476-conquer
                             </div>
                             <iframe width="560" height="315" src="https://www.youtube.com/embed/c_ZkvfLuCsE" frameborder="0"
                                 allow="accelerometer;  clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            <div class="comment-content">
+                            <div id="allcomments" class="comment-content">
                                 <h1>Leave a comment</h1>
-                                <hr>
-                                <form action="process.php">
+                                <!-- We will show past comments in the list below-->
+                                <ul id="pastcomments"></ul>
+                                <!-- This is the form for entering a new comment -->
+                                <form id="newcomment">
                                     <div class="x">
-                                        <label>Name</label>
-                                        </br>
-                                        <input type="text" name="textfield" placeholder="Enter your name">
-                                        </br>
-                                        <label>Comment</label>
-                                        </br>
-                                        <textarea name="tarea" cols="30" row="10" placeholder="Comment"></textarea>
-                                        </br>
-                                        </br>
-                                        <input type="submit" name="Subcomment" value="Post Comment">
+                                        <label for="tbName">Name</label>
+                                        <br>
+                                        <input id="tbName" type="text" maxlength="20" required name="textfield" placeholder="Enter your name">
+                                        <br>
+                                        <label for="txComment">Your Comment / Question</label>
+                                        <br>
+                                        <textarea id="txComment" maxlength="4096" required style="width:96%" name="tarea" cols="30" row="10"
+                                            placeholder="Comment"></textarea>
+                                        <br>
+                                        <input type="submit" id="btnSubmitComment" value="Submit Comment" id="txComment" name="Subcomment">
                                     </div>
                                 </form>
                             </div>
@@ -168,6 +170,30 @@ http://www.templatemo.com/tm-476-conquer
 
                                 <input type="submit" name="Subcomment" value="Subscribe">
                             </form>
+                        </div>
+                        <div class="blog-content1">
+                            <h2>Popular Recipe</h2>
+                        
+                            <div class="pp">
+                                <h4><a href="Chanar Jilapi.html">Chanar jilapi</a></h4>
+                                <img src="img/chanarjilapi.jpg" alt="Image">
+                                </br>
+                                <h4><a href="Chanar Payesh.html">Chanar payesh</a></h4>
+                                <img src="img/Chanar payesh.jpg" alt="Image">
+                                </br>
+                                <h4><a href="Kheer Sagar.html">Kheer sagar</a></h4>
+                                <img src="img/Kheersagar.jpg" alt="Image">
+                                </br>
+                                <h4><a href="Rabri.html">Rabri</a></h4>
+                                <img src="img/Rabri.jpg" alt="Image">
+                                </br>
+                                <h4><a href="Rasmalai.html">Rasmalai</a></h4>
+                                <img src="img/Rasmalai.jpg" alt="Image">
+                                </br>
+                                <h4><a href="Sitabhog.html">Sitabhog</a></h4>
+                                <img src="img/Sitabhog.jpg" alt="Image">
+                                </br>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -294,6 +320,71 @@ http://www.templatemo.com/tm-476-conquer
                 });
 
             });
+        </script>
+        <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+        
+        <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script>
+        <!--    
+                    <script defer src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script> --> -->
+        
+        
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+                     https://firebase.google.com/docs/web/setup#available-libraries -->
+        
+        <script>
+            // Your web app's Firebase configuration
+            var firebaseConfig = {
+                apiKey: "AIzaSyD5pQMEnA5VP3NzaCwtH3fATT048Nz-f1k",
+                authDomain: "comment-ece46.firebaseapp.com",
+                databaseURL: "https://comment-ece46.firebaseio.com",
+                projectId: "comment-ece46",
+                storageBucket: "comment-ece46.appspot.com",
+                messagingSenderId: "535649967045",
+                appId: "1:535649967045:web:9be365f85bc91099e709ac"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+
+
+
+
+            //Rootref is the whole database.
+            const rootRef = firebase.database().ref();
+            //commentsRef is just the pageCountsNode
+            const commentsRef = rootRef.child('comments');
+            //Listen for click on Submit Comment button, and post comment.
+            document.getElementById("btnSubmitComment").addEventListener("click", function () {
+                //Replace line breaks in comment with br tags.
+                var newcomment = document.getElementById('txComment').value.replace(/\n/g, "<br>");
+                //Define a new, keyed post.
+                var newPostRef = commentsRef.push();
+                //Fill tne new keyed post with data
+                newPostRef.set({
+                    name: document.getElementById('tbName').value.trim(),
+                    comment: newcomment.trim(),
+                    frompage: location.pathname,
+                    when: firebase.database.ServerValue.TIMESTAMP
+                });
+            });
+
+            function showpastcomments() {
+                var showat = document.getElementById('pastcomments');
+                //Get comments whose from page equals this page's pathname.
+                var commentsRef = firebase.database().ref('comments/').orderByChild('frompage').equalTo(location.pathname);
+                commentsRef.once('value', function (snapshot) {
+                    snapshot.forEach(function (itemSnapshot) {
+                        //Get the object for one snapshot
+                        var itemData = itemSnapshot.val();
+                        var comment = itemData.comment;
+                        var name = itemData.name;
+                        var when = new Date(itemData.when).toLocaleDateString("en-us");
+                        showat.innerHTML += "<li>" + comment + "<span> -- " + name + " (" + when +
+                            ")</span></li>";
+                    })
+                })
+            }
+            //Called when page first opens and also after Submit button click to show all comments for this page.
+            showpastcomments()
         </script>
 </body>
 

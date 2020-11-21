@@ -1,1 +1,0 @@
-# afnanmumu.github.io
