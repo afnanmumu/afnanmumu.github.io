@@ -67,12 +67,12 @@ http://www.templatemo.com/tm-476-conquer
 				</div>
 			</div>
 			<br>
-			<div class="container">
+			<div class="container" class="animate__animated animate__bounce animate__delay-2s">
 				<div class="row text-center inner">
-					<div class="col-sm-4" class="animate__animated animate__rubberBand">
+					<div class="col-sm-4" >
 						<div class="feature-content" >
 							<img src="img/1-1.jpg" alt="Image">
-							<h2 class="feature-content-title green-text">Rosogolla</h2>
+							<h2 class="feature-content-title green-text" class="animate__animated animate__bounce animate__delay-2s">Rosogolla</h2>
 							<p class="feature-content-description">Rosogolla, the syrupy dessert, was first originated and developed in Bangladesh. When any Bengali talks about sweet, nothing can beat Rosogolla.
 							</p>
 							<a href="Rosogolla.html" class="feature-content-link green-btn">See details</a>
@@ -172,12 +172,12 @@ http://www.templatemo.com/tm-476-conquer
 					<div class="container">
 						<br>
 						<br>
-						<div class="col-sm-3">
+						<div class="col-sm-3" class="showcase-left">
 							<div class="feature-content1" >
 								<img class="rounded-circle" src="img/4-5.jpg" alt="Image" class="myimage" class="img-responsive">
 							</div>
 						</div>
-						<div class="col-sm-9">
+						<div class="col-sm-9" class="showcase-right">
 							<div class="feature-content1">
 								<div class="tm-box-description">
 									<h2>About MUMU...</h2>
@@ -362,6 +362,33 @@ http://www.templatemo.com/tm-476-conquer
         });
         
     });
+</script>
+<script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+	crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script>
+	window.scroll(function () {
+		if (window.scrollTop() >= 50) {
+			'.navbar'.css('background', 'red');
+		} else {
+			'.navbar'.css('background', 'transparent');
+		}
+	});
+</script>
+
+<script>
+	sr.reveal('.showcase-left', {
+			duration: 2000,
+			origin: 'top',
+			distance: '300px',
+			reset: 'true'
+		});
+		sr.reveal('.showcase-right', {
+			duration: 2000,
+			origin: 'right',
+			distance: '300px'
+		});
 </script>
 </body>
 </html>
