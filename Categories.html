@@ -30,7 +30,7 @@ http://www.templatemo.com/tm-476-conquer
                     <li><a href="index.html">Homepage</a></li>
                     <li><a href="Categories.html">Categories</a></li>
                     <li><a href="Sign in.html">Sign In</a></li>
-                    <li><a href="#">Sign Out</a></li>
+                    <li><a href="#" onclick="signOut()" id="signOut">Sign Out</a></li>
                 </ul>
             </div>
         </div>
@@ -40,7 +40,7 @@ http://www.templatemo.com/tm-476-conquer
             <div class="container">
                 <div class="row text-center inner">
                     <div class="col-sm-9">
-                        <div class="blog-content">
+                        <div class="blog-content" class="showcase-left">
                             <img src="img/chanarjilapi.jpg" alt="Image">
                             <h2>Chanar jilapi</h2>
                             <p>Jilapi or Bengali Chanar Jalebi is my choice for J. I didn’t really search much for this alphabet as this was the first
@@ -48,7 +48,7 @@ http://www.templatemo.com/tm-476-conquer
                             <span><a href="Chanar Jilapi.html">read more</a></span><br>
                             <p id="blofr"></p>
                         </div>
-                        <div class="blog-content">
+                        <div class="blog-content" class="showcase-left">
                             <img src="img/Chanar payesh.jpg" alt="Image">
                             <h2>Chanar payesh</h2>
                             <p>Channar Payesh is an authentic dessert recipe of Bengali cuisine that you can make for your family and friends on
@@ -57,7 +57,7 @@ http://www.templatemo.com/tm-476-conquer
                             <span><a href="Chanar Payesh.html">read more</a></span><br>
                             <p id="blofr"></p>
                         </div>
-                        <div class="blog-content">
+                        <div class="blog-content" class="showcase-left">
                             <img src="img/Kheersagar.jpg" alt="Image">
                             <h2>Kheer sagar</h2>
                             <p>This dish is known as Kheer Sagar or Khira Saagar in Odia which literally translates to Ocean of milk in the Odia
@@ -67,7 +67,7 @@ http://www.templatemo.com/tm-476-conquer
                             <span><a href="Kheer Sagar.html">read more</a></span><br>
                             <p id="blofr"></p>
                         </div>
-                        <div class="blog-content">
+                        <div class="blog-content" class="showcase-left">
                             <img src="img/Rabri.jpg" alt="Image">
                             <h2>Rabri</h2>
                             <p>Basically rabri is thickened sweetened milk having layers of malai or cream in it. its flavored with cardamoms, saffron
@@ -79,7 +79,7 @@ http://www.templatemo.com/tm-476-conquer
                             <span><a href="Rabri.html">read more</a></span><br>
                             <p id="blofr"></p>
                         </div>
-                        <div class="blog-content">
+                        <div class="blog-content" class="showcase-left">
                             <img src="img/Rasmalai.jpg" alt="Image">
                             <h2>Rasmalai</h2>
                             <p>Rasmalai is my favorite Indian sweet by miles. As a kid I wasn’t very fond of sweets but Rasmalai was my absolute
@@ -90,7 +90,7 @@ http://www.templatemo.com/tm-476-conquer
                             <span><a href="Rasmalai.html">read more</a></span><br>
                             <p id="blofr"></p>
                         </div>
-                        <div class="blog-content">
+                        <div class="blog-content" class="showcase-left">
                             <img src="img/Sitabhog.jpg" alt="Image">
                             <h2>Sitabhog</h2>
                             <p>Sita Bhog is my choice for S in the A to Z Bengali Sweets Series. I don’t think I came across any other Bengali Sweet
@@ -146,7 +146,7 @@ http://www.templatemo.com/tm-476-conquer
                                             <li><a href="index.html">Homepage</a></li>
                                             <li><a href="Categories.html">Categories</a></li>
                                             <li><a href="Sign in.html">Sign In</a></li>
-                                            <li><a href="#">Sign Out</a></li>
+                                            <li><a href="#" onclick="signOut()" id="signOut">Sign Out</a></li>
         
                                         </ul>
                                     </div>
@@ -254,6 +254,78 @@ http://www.templatemo.com/tm-476-conquer
             });
 
         });
+    </script>
+    <script>
+        sr.reveal('.showcase-left', {
+            duration: 2000,
+            origin: 'top',
+            distance: '300px',
+            reset: 'true'
+        });
+        sr.reveal('.showcase-right', {
+            duration: 2000,
+            origin: 'right',
+            distance: '300px'
+        });
+        firebase.initializeApp(firebaseConfig);
+
+            const auth = firebase.auth();
+
+
+            function signUp() {
+
+                var email = document.getElementById("email");
+                var password = document.getElementById("password");
+
+                const promise = auth.createUserWithEmailAndPassword(email.value, password.value);
+                promise.catch(e => alert(e.message));
+
+                alert("Signed Up");
+            }
+
+            function signIn() {
+
+                var email = document.getElementById("email");
+                var password = document.getElementById("password");
+
+                const promise = auth.signInWithEmailAndPassword(email.value, password.value);
+                promise.catch(e => alert(e.message));
+
+
+
+
+            }
+
+
+            function signOut() {
+
+                auth.signOut();
+                alert("Signed Out");
+
+            }
+
+
+
+            auth.onAuthStateChanged(function (user) {
+
+                if (user) {
+
+                    var email = user.email;
+                    alert("Active User " + email);
+
+                    //Take user to a different or home page
+
+                    //is signed in
+
+                } else {
+
+                    alert("No Active User");
+                    //no user is signed in
+                }
+
+
+
+            });
     </script>
 </body>
 
